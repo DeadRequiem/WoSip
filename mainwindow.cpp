@@ -100,7 +100,8 @@ void MainWindow::closeEvent(QCloseEvent *event) {
         trayIcon->show();    // Ensure the tray icon is shown
         event->ignore();     // Ignore the close event (prevent app from closing)
     } else {
-        trayIcon->hide();    // Hide tray icon if not minimizing to tray
+        trayIcon->hide();    // Ensure tray icon is hidden before closing
+        delete trayIcon;     // Explicitly delete the tray icon to remove it
         event->accept();     // Close normally if not minimizing to tray
     }
 }
@@ -176,14 +177,27 @@ void MainWindow::onIniFileChanged(const QString &path) {
 void MainWindow::fetchMasterFromGitHub() {
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);
     connect(manager, &QNetworkAccessManager::finished, this, &MainWindow::onMasterIPFetched);
-    manager->get(QNetworkRequest(QUrl(gitMasterUrl)));
+
+    // Make the network request
+    QNetworkRequest request((QUrl(gitMasterUrl)));
+    QNetworkReply* reply = manager->get(request);
+
+    // Handle network errors immediately and gracefully
+    connect(reply, &QNetworkReply::finished, [this, reply]() {
+        if (reply->error() != QNetworkReply::NoError) {
+            // Log the error or show a message
+            QMessageBox::warning(this, "Error", "Failed to fetch the master IP from GitHub: " + reply->errorString());
+        }
+        reply->deleteLater();  // Clean up the reply
+    });
 }
 
-// Callback to handle fetched master IP from GitHub
 void MainWindow::onMasterIPFetched(QNetworkReply *reply) {
     if (reply->error() == QNetworkReply::NoError) {
         QString masterValue = reply->readAll().trimmed();
         ui->lineEdit_masterFromGit->setText(masterValue);  // Update UI with the fetched master IP
+    } else {
+        QMessageBox::warning(this, "Error", "Failed to fetch the master IP: " + reply->errorString());
     }
     reply->deleteLater();
 }
