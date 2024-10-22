@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ico/ico.png</file>   <!-- PNG file for the application icons (tray, toolbar) -->
+        <file>ico/ico32.png</file> <!-- PNG file for smaller icons -->
+        <file>ico/app_icon.ico</file>  <!-- This is the .ico file for the .exe -->
+    </qresource>
+</RCC>

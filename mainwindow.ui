@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WoSip Configuration</string>
+  </property>
+  <property name="styleSheet">
+   <string>
+    QMainWindow {
+      background-color: #f0f0f0;
+    }
+    QPushButton {
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      min-height: 35px;
+    }
+    QPushButton:hover {
+      background-color: #1565c0;
+    }
+    QPushButton#pushButton_stopProgram {
+      background-color: #e53935;
+    }
+    QPushButton#pushButton_stopProgram:hover {
+      background-color: #c62828;
+    }
+    QLineEdit {
+      padding: 8px;
+      border: 1px solid #b0bec5;
+      border-radius: 6px;
+      background-color: white;
+    }
+    QLineEdit:read-only {
+      background-color: #eceff1;
+    }
+    QLabel {
+      color: #424242;
+      font-weight: 500;
+      font-size: 13px;
+    }
+    QGroupBox {
+      font-weight: 600;
+      border: 1px solid #b0bec5;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+      background-color: #fafafa;
+    }
+    QCheckBox {
+      spacing: 10px;
+      font-size: 13px;
+    }
+   </string>
+</property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>14</number>
+    </property>
+    <property name="margin">
+     <number>20</number>
+    </property>
+    
+    <!-- Game Configuration Group -->
+    <item>
+     <widget class="QGroupBox" name="groupBox_gameConfig">
+      <property name="title">
+       <string>Game Configuration</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+         <number>10</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="pushButton_selectExe">
+           <property name="text">
+            <string>Select Game Executable</string>
+           </property>
+           <property name="icon">
+            <iconset theme="folder-open"/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_exeFilePath">
+         <property name="text">
+          <string>Selected Game Executable Path:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_exeFilePath">
+         <property name="readOnly">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- Server Configuration Group -->
+    <item>
+     <widget class="QGroupBox" name="groupBox_serverConfig">
+      <property name="title">
+       <string>Server Configuration</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+         <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_masterFromGit">
+         <property name="text">
+          <string>Master IP from Git:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_masterFromGit">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_currentMasterIP">
+         <property name="text">
+          <string>Current .ini Master IP:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_currentMasterIP">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- Settings Group -->
+    <item>
+     <widget class="QGroupBox" name="groupBox_settings">
+      <property name="title">
+       <string>Settings</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QCheckBox" name="checkBox_minimizeTray">
+         <property name="text">
+          <string>Allow minimize to system tray</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+
+    <!-- Action Buttons -->
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="pushButton_help">
+        <property name="text">
+         <string>Help</string>
+        </property>
+        <property name="icon">
+         <iconset theme="help-contents"/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_credits">
+        <property name="text">
+         <string>Credits</string>
+        </property>
+        <property name="icon">
+         <iconset theme="help-about"/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_stopProgram">
+        <property name="text">
+         <string>Stop Program</string>
+        </property>
+        <property name="icon">
+         <iconset theme="process-stop"/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
