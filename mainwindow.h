@@ -32,9 +32,11 @@ private slots:
     void handleTrayIconActivated(QSystemTrayIcon::ActivationReason reason);  // Handle tray icon clicks
     void showHelp();                               // Slot for Help button
     void showCredits();                            // Slot for Credits button
+    void loadConfigFile();                         // Load config data at startup
+    void saveConfigFile();                         // Save config data when closing
 
 private:
-    QString loadIniFilePath();                     // Load ini file path from config.txt
+    void deleteIniFile();                          // Function to delete the INI file if needed
     void compareAndUpdateIni(const QString &iniFilePath, const QString &newMasterValue);  // Compare and update .ini
 
     Ui::MainWindow *ui;                            // Pointer to the UI

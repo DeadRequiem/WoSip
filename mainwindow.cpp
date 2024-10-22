@@ -56,6 +56,9 @@ MainWindow::MainWindow(QWidget *parent)
     // Minimize to tray toggle
     connect(ui->checkBox_minimizeTray, &QCheckBox::toggled, this, &MainWindow::toggleMinimizeToTray);
 
+    // Load config file at startup
+    loadConfigFile();
+
     // Fetch master IP from GitHub
     fetchMasterFromGitHub();
 
@@ -93,6 +96,61 @@ void MainWindow::toggleMinimizeToTray() {
     minimizeToTray = ui->checkBox_minimizeTray->isChecked();
 }
 
+// Load config file if it exists
+void MainWindow::loadConfigFile() {
+    QFile configFile(configFilePath);
+    if (configFile.exists()) {
+        if (configFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream in(&configFile);
+            QString line;
+
+            while (!in.atEnd()) {
+                line = in.readLine().trimmed();
+
+                // Parse the iniFilePath
+                if (line.startsWith("iniFilePath = ")) {
+                    QString iniFilePath = line.mid(QString("iniFilePath = ").length()).trimmed();
+                    ui->lineEdit_exeFilePath->setText(iniFilePath);
+                }
+
+                // Parse deleteIniOnClose setting
+                if (line.startsWith("deleteIniOnClose = ")) {
+                    QString value = line.mid(QString("deleteIniOnClose = ").length()).trimmed();
+                    ui->checkBox_deleteIniOnClose->setChecked(value == "true");
+                }
+
+                // Parse minimizeToTray setting
+                if (line.startsWith("minimizeToTray = ")) {
+                    QString value = line.mid(QString("minimizeToTray = ").length()).trimmed();
+                    minimizeToTray = (value == "true");
+                    ui->checkBox_minimizeTray->setChecked(minimizeToTray);
+                }
+            }
+            configFile.close();
+        }
+    }
+}
+
+// Save the current settings to the config file
+void MainWindow::saveConfigFile() {
+    QFile configFile(configFilePath);
+    if (configFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&configFile);
+
+        // Add sections and comments to the config file for clarity
+        out << "# WoSip Configuration Settings\n\n";
+
+        out << "[Paths]\n";
+        out << "iniFilePath = " << ui->lineEdit_exeFilePath->text() << "\n\n";
+
+        out << "[Settings]\n";
+        out << "deleteIniOnClose = " << (ui->checkBox_deleteIniOnClose->isChecked() ? "true" : "false") << "\n";
+        out << "minimizeToTray = " << (ui->checkBox_minimizeTray->isChecked() ? "true" : "false") << "\n";
+
+        configFile.close();
+    }
+}
+
 // Handle closing/minimizing window event
 void MainWindow::closeEvent(QCloseEvent *event) {
     if (minimizeToTray) {
@@ -100,9 +158,13 @@ void MainWindow::closeEvent(QCloseEvent *event) {
         trayIcon->show();    // Ensure the tray icon is shown
         event->ignore();     // Ignore the close event (prevent app from closing)
     } else {
-        trayIcon->hide();    // Ensure tray icon is hidden before closing
-        delete trayIcon;     // Explicitly delete the tray icon to remove it
-        event->accept();     // Close normally if not minimizing to tray
+        if (ui->checkBox_deleteIniOnClose->isChecked()) {
+            deleteIniFile();
+        }
+        saveConfigFile();     // Save the current settings
+        trayIcon->hide();     // Ensure tray icon is hidden before closing
+        delete trayIcon;      // Explicitly delete the tray icon to remove it
+        event->accept();      // Close normally if not minimizing to tray
     }
 }
 
@@ -121,6 +183,15 @@ void MainWindow::handleTrayIconActivated(QSystemTrayIcon::ActivationReason reaso
     if (reason == QSystemTrayIcon::Trigger || reason == QSystemTrayIcon::DoubleClick) {
         showNormal();    // Restore window
         trayIcon->hide(); // Hide tray icon when window is restored
+    }
+}
+
+// Function to delete the INI file if needed
+void MainWindow::deleteIniFile() {
+    QString iniFilePath = ui->lineEdit_exeFilePath->text();
+    QFile iniFile(iniFilePath);
+    if (iniFile.exists()) {
+        iniFile.remove();  // Delete the INI file
     }
 }
 
@@ -148,12 +219,7 @@ void MainWindow::selectExeFile() {
             }
 
             // Save ini file path to config.txt
-            QFile configFile(configFilePath);
-            if (configFile.open(QIODevice::WriteOnly)) {
-                QTextStream out(&configFile);
-                out << iniFilePath;
-                configFile.close();
-            }
+            saveConfigFile();
         }
     }
 }

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>500</height>
+    <height>550</height>  <!-- Adjusted height -->
    </rect>
   </property>
   <property name="windowTitle">
@@ -63,7 +63,7 @@
       font-size: 13px;
     }
    </string>
-</property>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
@@ -168,6 +168,14 @@
         <widget class="QCheckBox" name="checkBox_minimizeTray">
          <property name="text">
           <string>Allow minimize to system tray</string>
+         </property>
+        </widget>
+       </item>
+       <!-- New Checkbox for Delete INI on Close -->
+       <item>
+        <widget class="QCheckBox" name="checkBox_deleteIniOnClose">
+         <property name="text">
+          <string>Delete INI file on program close</string>
          </property>
         </widget>
        </item>
