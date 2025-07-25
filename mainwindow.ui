@@ -3,180 +3,290 @@
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>600</width>
-    <height>550</height>  <!-- Adjusted height -->
-   </rect>
+   <rect><x>0</x><y>0</y><width>580</width><height>520</height></rect>
   </property>
   <property name="windowTitle">
    <string>WoSip Configuration</string>
   </property>
   <property name="styleSheet">
-   <string>
+   <string notr="true">
+    * {
+      font-family: "Segoe UI", "Arial", sans-serif;
+      color: #212121;
+    }
     QMainWindow {
-      background-color: #f0f0f0;
+      background-color: #f5f5f5;
+      color: #212121;
     }
     QPushButton {
-      background-color: #1e88e5;
-      color: white;
+      background-color: #2196f3;
+      color: #ffffff;
       border: none;
-      padding: 10px;
+      padding: 8px 16px;
       border-radius: 6px;
-      font-size: 14px;
-      min-height: 35px;
+      font-size: 13px;
+      font-family: "Segoe UI", "Arial", sans-serif;
+      min-height: 32px;
+      font-weight: 500;
     }
     QPushButton:hover {
-      background-color: #1565c0;
+      background-color: #1976d2;
+      color: #ffffff;
+    }
+    QPushButton:disabled {
+      background-color: #bdbdbd;
+      color: #757575;
+    }
+    QPushButton#pushButton_runGame {
+      background-color: #4caf50;
+      color: #ffffff;
+      font-weight: 600;
+      min-height: 38px;
+    }
+    QPushButton#pushButton_runGame:hover {
+      background-color: #388e3c;
+      color: #ffffff;
+    }
+    QPushButton#pushButton_runGame:disabled {
+      background-color: #bdbdbd;
+      color: #757575;
     }
     QPushButton#pushButton_stopProgram {
-      background-color: #e53935;
+      background-color: #f44336;
+      color: #ffffff;
     }
     QPushButton#pushButton_stopProgram:hover {
-      background-color: #c62828;
+      background-color: #d32f2f;
+      color: #ffffff;
+    }
+    QPushButton#pushButton_refreshMaster {
+      background-color: #ff9800;
+      color: #ffffff;
+      padding: 4px 12px;
+      min-height: 28px;
+      font-size: 12px;
+    }
+    QPushButton#pushButton_refreshMaster:hover {
+      background-color: #f57c00;
+      color: #ffffff;
     }
     QLineEdit {
-      padding: 8px;
-      border: 1px solid #b0bec5;
+      padding: 8px 12px;
+      border: 2px solid #e0e0e0;
       border-radius: 6px;
-      background-color: white;
+      background-color: #ffffff;
+      color: #212121;
+      font-size: 13px;
+      font-family: "Segoe UI", "Arial", sans-serif;
+    }
+    QLineEdit:focus {
+      border-color: #2196f3;
+      color: #212121;
     }
     QLineEdit:read-only {
-      background-color: #eceff1;
+      background-color: #f8f9fa;
+      border-color: #e9ecef;
+      color: #6c757d;
     }
     QLabel {
       color: #424242;
       font-weight: 500;
       font-size: 13px;
+      font-family: "Segoe UI", "Arial", sans-serif;
     }
     QGroupBox {
       font-weight: 600;
-      border: 1px solid #b0bec5;
+      font-size: 14px;
+      font-family: "Segoe UI", "Arial", sans-serif;
+      border: 2px solid #e0e0e0;
       border-radius: 8px;
-      padding: 12px;
-      margin-top: 12px;
-      background-color: #fafafa;
+      padding-top: 16px;
+      margin-top: 8px;
+      background-color: #ffffff;
+      color: #212121;
+    }
+    QGroupBox::title {
+      subcontrol-origin: margin;
+      left: 12px;
+      padding: 0 8px 0 8px;
+      color: #1976d2;
+      font-family: "Segoe UI", "Arial", sans-serif;
     }
     QCheckBox {
-      spacing: 10px;
+      spacing: 8px;
       font-size: 13px;
+      font-family: "Segoe UI", "Arial", sans-serif;
+      color: #424242;
+    }
+    QCheckBox::indicator {
+      width: 16px;
+      height: 16px;
+    }
+    QCheckBox::indicator:unchecked {
+      border: 2px solid #bdbdbd;
+      border-radius: 3px;
+      background-color: #ffffff;
+    }
+    QCheckBox::indicator:checked {
+      border: 2px solid #2196f3;
+      border-radius: 3px;
+      background-color: #2196f3;
+    }
+    QStatusBar {
+      background-color: #f5f5f5;
+      color: #424242;
+      font-family: "Segoe UI", "Arial", sans-serif;
+    }
+    QMenuBar {
+      background-color: #f5f5f5;
+      color: #212121;
+      font-family: "Segoe UI", "Arial", sans-serif;
+    }
+    QDialog QPushButton {
+      max-width: 120px;
+      min-width: 80px;
+      padding: 6px 12px;
+      font-size: 13px;
+      min-height: 28px;
+    }
+    QMessageBox QPushButton {
+      max-width: 100px;
+      min-width: 70px;
+      padding: 6px 12px;
+      font-size: 13px;
+      min-height: 28px;
+    }
+    QDialogButtonBox QPushButton {
+      max-width: 120px;
+      min-width: 80px;
+      padding: 6px 12px;
+      font-size: 13px;
+      min-height: 28px;
     }
    </string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
-     <number>14</number>
+     <number>16</number>
     </property>
-    <property name="margin">
-     <number>20</number>
+    <property name="leftMargin">
+     <number>16</number>
+    </property>
+    <property name="topMargin">
+     <number>16</number>
+    </property>
+    <property name="rightMargin">
+     <number>16</number>
+    </property>
+    <property name="bottomMargin">
+     <number>16</number>
     </property>
     
-    <!-- Game Configuration Group -->
     <item>
      <widget class="QGroupBox" name="groupBox_gameConfig">
-      <property name="title">
-       <string>Game Configuration</string>
-      </property>
+      <property name="title"><string>Game Setup</string></property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <property name="spacing">
-         <number>10</number>
+        <number>12</number>
        </property>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <widget class="QPushButton" name="pushButton_selectExe">
+         <property name="text"><string>Browse for Game Executable</string></property>
+         <property name="icon"><iconset theme="folder-open"/></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_exeFilePath">
+         <property name="text"><string>Game Path:</string></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_exeFilePath">
+         <property name="readOnly"><bool>false</bool></property>
+         <property name="placeholderText"><string>No game selected...</string></property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <item>
+     <widget class="QGroupBox" name="groupBox_serverConfig">
+      <property name="title"><string>Server Settings</string></property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_masterIP">
          <item>
-          <widget class="QPushButton" name="pushButton_selectExe">
-           <property name="text">
-            <string>Select Game Executable</string>
+          <widget class="QLabel" name="label_masterFromGit">
+           <property name="text"><string>Master Server IP:</string></property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_master">
+           <property name="orientation"><enum>Qt::Horizontal</enum></property>
+           <property name="sizeHint" stdset="0">
+            <size><width>40</width><height>20</height></size>
            </property>
-           <property name="icon">
-            <iconset theme="folder-open"/>
-           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_refreshMaster">
+           <property name="text"><string>Refresh</string></property>
+           <property name="toolTip"><string>Update master IP from Git repository</string></property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <widget class="QLabel" name="label_exeFilePath">
-         <property name="text">
-          <string>Selected Game Executable Path:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="lineEdit_exeFilePath">
-         <property name="readOnly">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-
-    <!-- Server Configuration Group -->
-    <item>
-     <widget class="QGroupBox" name="groupBox_serverConfig">
-      <property name="title">
-       <string>Server Configuration</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <property name="spacing">
-         <number>10</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="label_masterFromGit">
-         <property name="text">
-          <string>Master IP from Git:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QLineEdit" name="lineEdit_masterFromGit">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
+         <property name="readOnly"><bool>true</bool></property>
+         <property name="placeholderText"><string>Loading...</string></property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_overrideGit">
+         <property name="text"><string>Use custom server IP</string></property>
+         <property name="toolTip"><string>Override the automatic IP with your own server address</string></property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="label_currentMasterIP">
-         <property name="text">
-          <string>Current .ini Master IP:</string>
-         </property>
+         <property name="text"><string>Custom Server IP:</string></property>
+         <property name="visible"><bool>false</bool></property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="lineEdit_currentMasterIP">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
+         <property name="readOnly"><bool>false</bool></property>
+         <property name="visible"><bool>false</bool></property>
+         <property name="placeholderText"><string>Enter custom IP address...</string></property>
         </widget>
        </item>
       </layout>
      </widget>
     </item>
 
-    <!-- Settings Group -->
     <item>
      <widget class="QGroupBox" name="groupBox_settings">
-      <property name="title">
-       <string>Settings</string>
-      </property>
+      <property name="title"><string>Options</string></property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="spacing">
+        <number>8</number>
+       </property>
        <item>
         <widget class="QCheckBox" name="checkBox_minimizeTray">
-         <property name="text">
-          <string>Allow minimize to system tray</string>
-         </property>
+         <property name="text"><string>Minimize to system tray</string></property>
+         <property name="toolTip"><string>Hide the application in the system tray when minimized</string></property>
         </widget>
        </item>
-       <!-- New Checkbox for Delete INI on Close -->
        <item>
         <widget class="QCheckBox" name="checkBox_deleteIniOnClose">
-         <property name="text">
-          <string>Delete INI file on program close</string>
-         </property>
+         <property name="text"><string>Clean up configuration on exit</string></property>
+         <property name="toolTip"><string>Automatically delete temporary INI files when closing</string></property>
         </widget>
        </item>
       </layout>
@@ -185,66 +295,57 @@
 
     <item>
      <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
+      <property name="orientation"><enum>Qt::Vertical</enum></property>
       <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
+       <size><width>20</width><height>10</height></size>
       </property>
      </spacer>
     </item>
 
-    <!-- Action Buttons -->
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_actions">
+      <property name="spacing">
+       <number>12</number>
+      </property>
       <item>
        <widget class="QPushButton" name="pushButton_help">
-        <property name="text">
-         <string>Help</string>
-        </property>
-        <property name="icon">
-         <iconset theme="help-contents"/>
-        </property>
+        <property name="text"><string>Help</string></property>
+        <property name="icon"><iconset theme="help-contents"/></property>
+        <property name="toolTip"><string>View help and documentation</string></property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_credits">
-        <property name="text">
-         <string>Credits</string>
-        </property>
-        <property name="icon">
-         <iconset theme="help-about"/>
-        </property>
+        <property name="text"><string>About</string></property>
+        <property name="icon"><iconset theme="help-about"/></property>
+        <property name="toolTip"><string>View credits and version information</string></property>
        </widget>
       </item>
       <item>
        <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
+        <property name="orientation"><enum>Qt::Horizontal</enum></property>
         <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
+         <size><width>40</width><height>20</height></size>
         </property>
        </spacer>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_stopProgram">
-        <property name="text">
-         <string>Stop Program</string>
-        </property>
-        <property name="icon">
-         <iconset theme="process-stop"/>
-        </property>
+        <property name="text"><string>Exit</string></property>
+        <property name="icon"><iconset theme="application-exit"/></property>
+        <property name="toolTip"><string>Close the application</string></property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_runGame">
+        <property name="text"><string>Launch Game</string></property>
+        <property name="enabled"><bool>false</bool></property>
+        <property name="toolTip"><string>Start the game with current configuration</string></property>
        </widget>
       </item>
      </layout>
     </item>
+
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar"/>
